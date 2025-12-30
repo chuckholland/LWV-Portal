@@ -210,7 +210,12 @@
       appNumberElementId: "la-appnum",
       unitElementId: "la-unit",
       mutualElementId: "la-mutual",
-      statusElementId: "la-status",
+      addressElementId: "la-address",
+      appDateElementId: "la-appdate",
+      statusPillId: "la-status-pill",
+
+      functionAllocationSetName: "msdyn_functionallocations",
+      functionAllocationAddressField: "msdyn_address1",
 
       applicantsRootId: "la-applicants",
       applicantsTableSelector: ".entity-grid table, .entitylist table, table.table",
@@ -279,8 +284,22 @@
     function setText(id, v) {
       const el = byId(id);
       if (!el) return;
-      el.textContent = isPlaceholder(v) ? "—" : String(v);
-      el.title = el.textContent;
+      const value = isPlaceholder(v) ? "—" : String(v);
+      if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement || el instanceof HTMLSelectElement) {
+        el.value = value;
+      } else {
+        el.textContent = value;
+      }
+      el.title = value;
+    }
+
+    function readText(id) {
+      const el = byId(id);
+      if (!el) return "";
+      if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement || el instanceof HTMLSelectElement) {
+        return norm(el.value);
+      }
+      return norm(el.textContent);
     }
 
     function formatted(row, logicalName) {
@@ -308,6 +327,63 @@
         }
       }
       return "";
+    }
+
+    async function readLookupGuid(appGuid, candidates) {
+      for (const field of candidates) {
+        try {
+          const row = await apiGetApp(appGuid, field);
+          const v = row?.[field];
+          const id = parseGuid(v);
+          if (id) return id;
+        } catch {
+          // field likely doesn't exist on this environment; ignore
+        }
+      }
+      return "";
+    }
+
+    function formatDate(value) {
+      if (isPlaceholder(value)) return "";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return String(value);
+      const mm = String(date.getMonth() + 1).padStart(2, "0");
+      const dd = String(date.getDate()).padStart(2, "0");
+      const yyyy = date.getFullYear();
+      return `${mm}/${dd}/${yyyy}`;
+    }
+
+    function setStatusPill(status) {
+      const el = byId(CFG.statusPillId);
+      if (!el) return;
+
+      const normalized = norm(status).toLowerCase();
+      el.classList.remove("la-badge--ok", "la-badge--warn", "la-badge--muted");
+      el.classList.add("la-badge");
+
+      let variant = "la-badge--muted";
+      if (normalized.includes("active") || normalized.includes("approved") || normalized.includes("complete")) {
+        variant = "la-badge--ok";
+      } else if (normalized.includes("pending") || normalized.includes("review") || normalized.includes("in progress")) {
+        variant = "la-badge--warn";
+      }
+      el.classList.add(variant);
+      el.textContent = isPlaceholder(status) ? "—" : String(status);
+    }
+
+    async function getLocationAddress(locationId) {
+      if (!locationId) return "";
+      try {
+        const select = encodeURIComponent(CFG.functionAllocationAddressField);
+        const { json } = await PortalApi.requestJson(
+          `/_api/${CFG.functionAllocationSetName}(${locationId})?$select=${select}`,
+          { method: "GET" }
+        );
+        return json?.[CFG.functionAllocationAddressField] || "";
+      } catch (e) {
+        log("Location address lookup failed:", e.message);
+        return "";
+      }
     }
 
     async function populateApplicationDetails(appGuid) {
@@ -342,7 +418,21 @@
         setText(CFG.appNumberElementId, appNum);
         setText(CFG.unitElementId, unit);
         setText(CFG.mutualElementId, mutual);
-        setText(CFG.statusElementId, status);
+        setStatusPill(status);
+
+        const appDateRaw = await readFirstExistingField(appGuid, [
+          "vms_applicationdate",
+          "vms_application_date",
+          "createdon",
+        ]);
+        setText(CFG.appDateElementId, formatDate(appDateRaw));
+
+        const locationId = await readLookupGuid(appGuid, [
+          "_vms_location_value",
+          "_vms_unit_value",
+        ]);
+        const address = await getLocationAddress(locationId);
+        setText(CFG.addressElementId, address);
 
         sessionStorage.setItem(CFG.sessionAppIdKey, appGuid);
         if (!isPlaceholder(appNum)) {
@@ -354,7 +444,7 @@
     }
 
     function readAppNumber() {
-      const fromDom = norm(byId(CFG.appNumberElementId)?.textContent);
+      const fromDom = readText(CFG.appNumberElementId);
       if (!isPlaceholder(fromDom)) return fromDom;
 
       const fromSess = norm(sessionStorage.getItem(CFG.sessionAppNumKey));
@@ -3327,4 +3417,3 @@ async function patchHeader(appId, payload) {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 })();
-
