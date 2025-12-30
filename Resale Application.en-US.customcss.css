@@ -1,0 +1,1025 @@
+/* FILE: /Lease-Application/Lease Application.en-US.customcss.css
+   PURPOSE: Make Lease-Application match Dashboard SaaS look & feel (tokens, cards, grid, buttons)
+*/
+
+/* ------------------------ TOKENS ------------------------ */
+:root {
+  --slds-brand: #0176d3;
+  --slds-brand-dark: #014486;
+  --slds-brand-contrast: #ffffff;
+
+  --slds-text: #1f2a36;
+  --slds-text-weak: #576574;
+
+  --slds-border: #d8dde6;
+  --slds-border-strong: #c2c7cf;
+  --slds-border-focus: #0176d3;
+
+  --slds-bg: #f7f9fb;
+  --slds-bg-surface: #ffffff;
+  --slds-bg-alt: #f4f6f9;
+
+  --slds-success: #2e844a;
+  --slds-warning: #ffba00;
+  --slds-error: #ba0517;
+
+  --slds-radius: 0.25rem;
+  --slds-radius-lg: 0.5rem;
+  --slds-radius-xl: 0.75rem;
+
+  --slds-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --slds-shadow-lg: 0 6px 18px rgba(0, 0, 0, 0.12);
+
+  --slds-font: "Salesforce Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+
+  --slds-input-padding-y: 0.6rem;
+  --slds-input-padding-x: 0.75rem;
+  --slds-focus-ring: 0 0 0 2px #ffffff, 0 0 0 4px var(--slds-border-focus);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --slds-text: #e6e9ed;
+    --slds-text-weak: #a9b2bd;
+    --slds-bg: #0f141b;
+    --slds-bg-surface: #141a23;
+    --slds-bg-alt: #101620;
+    --slds-border: #2a3442;
+    --slds-border-strong: #394557;
+    --slds-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+    --slds-shadow-lg: 0 4px 14px rgba(0, 0, 0, 0.55);
+  }
+}
+
+/* ------------------------ BASE ------------------------- */
+html,
+body {
+  background: var(--slds-bg);
+  color: var(--slds-text);
+  font-family: var(--slds-font);
+  line-height: 1.375;
+}
+
+a {
+  color: var(--slds-brand);
+}
+
+#lease-app {
+  max-width: 1100px;
+  margin: 16px auto 64px;
+  padding: 0 10px;
+}
+
+.la-shell {
+  background: var(--slds-bg-surface);
+  border: 1px solid var(--slds-border);
+  border-radius: var(--slds-radius-xl);
+  padding: 16px;
+  box-shadow: var(--slds-shadow);
+}
+
+/* -------------------- BUTTONS (SLDS-ish) ------------------- */
+.btn,
+.slds-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  border-radius: var(--slds-radius);
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--slds-border);
+  background: var(--slds-bg-surface);
+  color: var(--slds-text);
+  transition: transform 0.02s ease, box-shadow 0.15s ease, background 0.15s ease,
+    border-color 0.15s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn:active,
+.slds-button:active {
+  transform: translateY(1px);
+}
+
+.btn-primary,
+.slds-button_brand {
+  background: var(--slds-brand);
+  border-color: var(--slds-brand);
+  color: var(--slds-brand-contrast);
+}
+
+.btn-primary:hover,
+.slds-button_brand:hover {
+  background: #0a6fcc;
+  border-color: #0a6fcc;
+}
+
+.btn-primary:active,
+.slds-button_brand:active {
+  background: var(--slds-brand-dark);
+  border-color: var(--slds-brand-dark);
+}
+
+.btn-neutral,
+.slds-button_neutral {
+  background: var(--slds-bg-surface);
+  color: var(--slds-text);
+}
+
+.btn-neutral:hover,
+.slds-button_neutral:hover {
+  background: var(--slds-bg-alt);
+}
+
+.btn[disabled],
+.slds-button[disabled] {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+/* -------------------- FORMS / INPUTS -------------------- */
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea,
+.slds-input,
+.slds-select {
+  width: 100%;
+  background: var(--slds-bg-surface);
+  color: var(--slds-text);
+  border: 1px solid var(--slds-border);
+  border-radius: var(--slds-radius);
+  padding: var(--slds-input-padding-y) var(--slds-input-padding-x);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.slds-input:focus,
+.slds-select:focus {
+  border-color: var(--slds-border-focus);
+  box-shadow: var(--slds-focus-ring);
+}
+
+/* -------------------- HEADER / META -------------------- */
+.la-hdr {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.la-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--slds-text);
+}
+
+.la-subtitle {
+  margin: 4px 0 0;
+  font-size: 0.95rem;
+  color: var(--slds-text-weak);
+}
+
+.la-toast {
+  margin: 0 0 12px;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--slds-radius);
+  border: 1px solid var(--slds-border);
+  background: var(--slds-bg-surface);
+  color: var(--slds-text);
+}
+
+.la-toast--error {
+  border-color: #fca5a5;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.la-toast--ok {
+  border-color: #cde7d8;
+  background: #f0faf4;
+  color: var(--slds-success);
+}
+
+/* -------------------- CARDS / SECTIONS -------------------- */
+.la-card {
+  background: var(--slds-bg-surface);
+  border: 1px solid var(--slds-border);
+  border-radius: var(--slds-radius-xl);
+  box-shadow: var(--slds-shadow);
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.la-card__hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0.65rem 0.9rem;
+  background: var(--slds-bg-alt);
+  border-bottom: 1px solid var(--slds-border);
+  font-weight: 800;
+  color: var(--slds-text);
+}
+
+.la-card__bd {
+  padding: 0.9rem;
+}
+
+.la-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+}
+
+.la-meta b {
+  color: var(--slds-text-weak);
+  font-weight: 800;
+}
+
+/* -------------------- ENTITY LIST (Applicants) -------------------- */
+#la-applicants .entity-grid,
+#la-applicants .entitylist {
+  background: var(--slds-bg-surface);
+  border: 1px solid var(--slds-border);
+  border-radius: var(--slds-radius);
+  overflow: hidden;
+}
+
+#la-applicants .view-toolbar,
+#la-applicants .entity-grid .view-toolbar,
+#la-applicants .entitylist .view-toolbar,
+#la-applicants .action-bar {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--slds-border);
+  background: var(--slds-bg-surface);
+}
+
+#la-applicants table {
+  width: 100%;
+  margin: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+#la-applicants thead th {
+  background: var(--slds-bg-alt);
+  color: var(--slds-text-weak);
+  font-weight: 800;
+  font-size: 0.85rem;
+  border-bottom: 1px solid var(--slds-border);
+  padding: 0.6rem 0.75rem;
+}
+
+#la-applicants tbody td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--slds-border);
+  color: var(--slds-text);
+}
+
+#la-applicants tbody tr:hover {
+  background: #eef5fd;
+}
+
+#la-applicants .pagination {
+  padding: 0.6rem 0.75rem;
+}
+
+/* Make grid action buttons look SaaS */
+#la-applicants .btn,
+#la-applicants .slds-button,
+#la-applicants a.btn,
+#la-applicants a.button,
+#la-applicants .button {
+  border-radius: var(--slds-radius);
+}
+
+/* -------------------- FOOTER ACTIONS -------------------- */
+.la-ftr {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* -------------------- MOBILE -------------------- */
+@media (max-width: 768px) {
+  .la-shell {
+    padding: 12px;
+  }
+
+  .la-hdr {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .la-ftr {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* =========================================================
+   Dashboard Entity List: Row "Action Menu" dropdown button
+   Default: white + black chevron
+   Hover/Focus/Expanded: SaaS blue + white chevron
+   Scoped so it does NOT affect other buttons site-wide.
+   ========================================================= */
+
+:root{
+  --saas-blue: var(--slds-brand, #0176d3);
+  --saas-blue-dark: var(--slds-brand-dark, #014486);
+  --action-border: var(--slds-border, #d8dde6);
+  --action-fg: #111827;  /* black */
+  --action-fg-inv: #ffffff; /* white */
+}
+
+/* Target ONLY the entity list "action menu" cell button */
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn.btn-default,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn.btn-default{
+  background-color: #ffffff !important;
+  border-color: var(--action-border) !important;
+  color: var(--action-fg) !important;
+}
+
+/* Hover/Focus/Expanded (override portalbasic #f2cb75) */
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn.btn-default:hover,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn.btn-default:hover,
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn.btn-default:focus,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn.btn-default:focus,
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn.btn-default[aria-expanded="true"],
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn.btn-default[aria-expanded="true"],
+.entity-grid td[aria-label="action menu"] .dropdown.action.open > button.btn.btn-default,
+.entitylist td[aria-label="action menu"] .dropdown.action.open > button.btn.btn-default{
+  background-color: var(--saas-blue) !important;
+  border-color: var(--saas-blue) !important;
+  color: var(--action-fg-inv) !important;
+}
+
+/* Active press */
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn.btn-default:active,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn.btn-default:active{
+  background-color: var(--saas-blue-dark) !important;
+  border-color: var(--saas-blue-dark) !important;
+}
+
+/* Chevron/caret: default black */
+.entity-grid td[aria-label="action menu"] .dropdown.action > button .caret,
+.entitylist td[aria-label="action menu"] .dropdown.action > button .caret{
+  border-top-color: var(--action-fg) !important;
+  border-bottom-color: var(--action-fg) !important;
+}
+.entity-grid td[aria-label="action menu"] .dropdown.action > button::after,
+.entitylist td[aria-label="action menu"] .dropdown.action > button::after,
+.entity-grid td[aria-label="action menu"] .dropdown.action > button i,
+.entitylist td[aria-label="action menu"] .dropdown.action > button i,
+.entity-grid td[aria-label="action menu"] .dropdown.action > button svg,
+.entitylist td[aria-label="action menu"] .dropdown.action > button svg{
+  color: var(--action-fg) !important;
+  fill: var(--action-fg) !important;
+  stroke: var(--action-fg) !important;
+}
+
+/* Chevron/caret: hover/focus/expanded -> white */
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn-default:hover .caret,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn-default:hover .caret,
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn-default:focus .caret,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn-default:focus .caret,
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn-default[aria-expanded="true"] .caret,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn-default[aria-expanded="true"] .caret{
+  border-top-color: var(--action-fg-inv) !important;
+  border-bottom-color: var(--action-fg-inv) !important;
+}
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn-default:hover::after,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn-default:hover::after,
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn-default:focus::after,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn-default:focus::after,
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn-default[aria-expanded="true"]::after,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn-default[aria-expanded="true"]::after,
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn-default:hover i,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn-default:hover i,
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn-default:focus i,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn-default:focus i,
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn-default[aria-expanded="true"] i,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn-default[aria-expanded="true"] i,
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn-default:hover svg,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn-default:hover svg,
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn-default:focus svg,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn-default:focus svg,
+.entity-grid td[aria-label="action menu"] .dropdown.action > button.btn-default[aria-expanded="true"] svg,
+.entitylist td[aria-label="action menu"] .dropdown.action > button.btn-default[aria-expanded="true"] svg{
+  color: var(--action-fg-inv) !important;
+  fill: var(--action-fg-inv) !important;
+  stroke: var(--action-fg-inv) !important;
+}
+
+/*-- =========================================================
+FILE: /Resale-Application/Resale Application.en-US.customcss.css
+Drop-in styling (matches your SaaS look)
+========================================================= */
+#ra-fin-assets .ra-note{ color: var(--slds-text-weak, #576574); margin-bottom: 12px; }
+
+.ra-badge{
+  background: rgba(1,118,211,.12);
+  color: var(--slds-brand, #0176d3);
+  font-weight: 900;
+  font-size: .75rem;
+  padding: .35rem .6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(1,118,211,.25);
+}
+
+.ra-grid-card{
+  border: 1px solid var(--slds-border, #d8dde6);
+  border-radius: var(--slds-radius-xl, .75rem);
+  overflow: hidden;
+  margin-top: 12px;
+  background: var(--slds-bg-surface, #fff);
+  box-shadow: var(--slds-shadow, 0 2px 8px rgba(0,0,0,.08));
+}
+
+.ra-grid-hd{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding: .65rem .9rem;
+  background: var(--slds-bg-alt, #f4f6f9);
+  border-bottom: 1px solid var(--slds-border, #d8dde6);
+  font-weight: 900;
+}
+
+.ra-grid-actions{ display:flex; gap:8px; align-items:center; }
+
+.ra-table{ width:100%; border-collapse: separate; border-spacing: 0; }
+.ra-table th{
+  text-align:left; padding:.6rem .75rem; font-size:.85rem;
+  color: var(--slds-text-weak, #576574);
+  background: var(--slds-bg-alt, #f4f6f9);
+  border-bottom: 1px solid var(--slds-border, #d8dde6);
+  font-weight: 900;
+}
+.ra-table td{ padding:.55rem .75rem; border-bottom: 1px solid var(--slds-border, #d8dde6); vertical-align: top; }
+.ra-table tr:hover td{ background:#eef5fd; }
+
+.ra-in{
+  width:100%;
+  border: 1px solid var(--slds-border, #d8dde6);
+  border-radius: var(--slds-radius, .25rem);
+  padding: .5rem .6rem;
+  background: var(--slds-bg-surface, #fff);
+  color: var(--slds-text, #1f2a36);
+}
+.ra-in:focus{
+  outline:none;
+  border-color: var(--slds-border-focus, #0176d3);
+  box-shadow: var(--slds-focus-ring, 0 0 0 2px #fff, 0 0 0 4px #0176d3);
+}
+
+.ra-row-actions{ display:flex; gap:10px; justify-content:flex-end; }
+.ra-link{
+  background: transparent; border:none; padding:0;
+  color: var(--slds-brand, #0176d3);
+  font-weight: 900; cursor:pointer;
+}
+.ra-link:hover{ text-decoration: underline; }
+
+.ra-totals{
+  margin-top:14px;
+  border-top: 1px solid var(--slds-border, #d8dde6);
+  padding-top: 12px;
+}
+.ra-total-row{ display:flex; justify-content:flex-end; gap:12px; font-weight: 900; }
+.ra-total-row--muted{ opacity:.75; font-weight:800; }
+.ra-total-label{ color: var(--slds-text-weak, #576574); }
+.ra-total-value{ min-width: 220px; text-align:right; }
+
+.ra-msg{
+  margin-top:12px; padding:.75rem .85rem;
+  border-radius: var(--slds-radius, .25rem);
+  border: 1px solid var(--slds-border, #d8dde6);
+  background: var(--slds-bg-surface, #fff);
+  font-weight: 800;
+}
+.ra-msg.ok{ border-color: rgba(46,132,74,.35); background: rgba(46,132,74,.08); color:#0f5132; }
+.ra-msg.err{ border-color: rgba(186,5,23,.35); background: rgba(186,5,23,.08); color:#991b1b; }
+
+
+
+/* ===================================================================
+   Resale Financial Assets - Drawer / Modal
+   - Minimal additive styles; does not change existing layout
+   =================================================================== */
+
+.ra-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.45);
+  z-index: 9999;
+  display: none;
+}
+
+.ra-drawer-overlay.open {
+  display: block;
+}
+
+.ra-drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(560px, 100%);
+  background: var(--slds-surface, #fff);
+  box-shadow: var(--slds-shadow-lg);
+  border-left: 1px solid var(--slds-border);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 180ms ease;
+}
+
+.ra-drawer-overlay.open .ra-drawer {
+  transform: translateX(0);
+}
+
+.ra-drawer-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--slds-border);
+  background: var(--slds-surface, #fff);
+}
+
+.ra-drawer-title {
+  font-weight: 700;
+  color: var(--slds-text);
+  font-size: 16px;
+}
+
+.ra-drawer-x {
+  appearance: none;
+  border: 1px solid var(--slds-border);
+  background: var(--slds-surface, #fff);
+  border-radius: 10px;
+  width: 34px;
+  height: 34px;
+  font-size: 22px;
+  line-height: 28px;
+  cursor: pointer;
+}
+
+.ra-drawer-bd {
+  padding: 16px;
+  overflow: auto;
+}
+
+.ra-drawer-ft {
+  padding: 12px 16px;
+  border-top: 1px solid var(--slds-border);
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  background: var(--slds-surface, #fff);
+}
+
+.ra-drawer-form .ra-drawer-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ra-drawer-field-wide {
+  grid-column: 1 / -1;
+}
+
+.ra-drawer-label {
+  display: block;
+  font-size: 12px;
+  color: var(--slds-text-weak);
+  margin: 0 0 6px;
+}
+
+.ra-acc-btn {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--slds-border);
+  background: var(--slds-surface, #fff);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ra-acc-panel {
+  border: 1px solid var(--slds-border);
+  border-radius: 14px;
+  margin-top: 10px;
+  padding: 12px 14px;
+  background: var(--slds-surface, #fff);
+}
+
+.ra-acc-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ra-drawer-help {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  color: var(--slds-text-weak);
+}
+
+.ra-drawer-attach {
+  grid-column: 1 / -1;
+  border-top: 1px dashed var(--slds-border);
+  padding-top: 10px;
+}
+
+.ra-drawer-attach-title {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: var(--slds-text);
+}
+
+@media (max-width: 640px) {
+  .ra-drawer-form .ra-drawer-row,
+  .ra-acc-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -------------------- DRAWER ATTACHMENTS ------------------- */
+.ra-drawer-attach-row{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin: 8px 0 10px;
+}
+
+.ra-attach-list{
+  margin-top: 6px;
+}
+
+.ra-attach-item{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: start;
+  padding: 10px 0;
+  border-top: 1px solid var(--slds-border);
+}
+
+.ra-attach-name{
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--slds-text);
+}
+
+.ra-attach-sub{
+  font-size: 12px;
+  color: var(--slds-text-weak);
+  margin-top: 2px;
+}
+
+.ra-attach-actions{
+  display: inline-flex;
+  gap: 8px;
+}
+
+/* SaaS blue hover for key buttons */
+.ra-add-row.btn.btn-default:hover,
+#ra-drawer-save.btn.btn-default:hover{
+  background: #0a6fcc !important;
+  border-color: #0a6fcc !important;
+  color: #ffffff !important;
+}
+
+/* Main Save button (#la-save): SaaS dark blue on keyboard focus + active (no purple) */
+#lease-app #la-save:focus,
+#lease-app #la-save:focus-visible,
+#lease-app #la-save:active,
+#lease-app #la-save.btn:active,
+#lease-app #la-save.btn.btn-default:active{
+  background: var(--slds-brand-dark, #014486) !important;
+  border-color: var(--slds-brand-dark, #014486) !important;
+  color: #ffffff !important;
+  outline: none !important;
+}
+
+/* Add the blue glow ring for #la-save focus */
+#lease-app #la-save:focus,
+#lease-app #la-save:focus-visible{
+  outline: none !important;
+  box-shadow: 0 0 0 0.2rem rgba(1, 118, 211, 0.35) !important;
+}
+
+/* Optional: keep a clean SaaS focus ring
+#lease-app #la-save:focus,
+#lease-app #la-save:focus-visible{
+  outline: none !important;
+} */
+
+/* Financial Assets: Add row should be SaaS blue on keyboard focus (tab) */
+#ra-fin-assets .ra-add-row.btn.btn-default:focus,
+#ra-fin-assets .ra-add-row.btn.btn-default:focus-visible{
+  background: var(--slds-brand, #0176d3) !important;
+  border-color: var(--slds-brand, #0176d3) !important;
+  color: #ffffff !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--slds-brand, #0176d3) !important;
+}
+
+/* ------------------------ UX PATCH v8 (buttons + inline upload status) ------------------------ */
+
+/* Keep primary "Save Financial Assets" from turning purple on active/focus */
+#ra-save-assets:active,
+#ra-save-assets.active,
+#ra-save-assets:active:focus,
+#ra-save-assets:active:focus-visible{
+  background: var(--saas-blue-dark) !important;
+  border-color: var(--saas-blue-dark) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+#ra-save-assets:focus,
+#ra-save-assets:focus-visible{
+  outline: none !important;
+  box-shadow: 0 0 0 0.2rem rgba(1, 118, 211, 0.25) !important;
+}
+
+/* Save Financial Assets: keep SaaS dark blue on keyboard focus (tab) and click */
+#lease-app #ra-save-assets:focus,
+#lease-app #ra-save-assets:focus-visible,
+#lease-app #ra-save-assets:active,
+#lease-app #ra-save-assets.btn:active,
+#lease-app #ra-save-assets.btn.btn-default:active{
+  background: var(--slds-brand-dark, #014486) !important;
+  border-color: var(--slds-brand-dark, #014486) !important;
+  color: #ffffff !important;
+  outline: none !important;
+}
+
+/* Drawer action buttons ("Download", "Remove", "Close") hover should be SaaS blue */
+.ra-drawer-overlay .btn.btn-default:hover,
+.ra-drawer-overlay .btn.btn-default:focus,
+.ra-drawer-overlay .btn.btn-default:focus-visible,
+.ra-drawer-overlay .btn.btn-primary:hover,
+.ra-drawer-overlay .btn.btn-primary:focus,
+.ra-drawer-overlay .btn.btn-primary:focus-visible,
+.ra-drawer-overlay .ra-link:hover,
+.ra-drawer-overlay .ra-link:focus{
+  background: var(--saas-blue) !important;
+  border-color: var(--saas-blue) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.ra-drawer-overlay .btn.btn-default:active,
+.ra-drawer-overlay .btn.btn-default.active,
+.ra-drawer-overlay .btn.btn-primary:active,
+.ra-drawer-overlay .btn.btn-primary.active,
+.ra-drawer-overlay .ra-link:active{
+  background: var(--saas-blue-dark) !important;
+  border-color: var(--saas-blue-dark) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+/* Inline upload status (replaces intrusive center "Uploading..." overlay) */
+.ra-attach-status{
+  min-height: 18px;
+  padding-top: 6px;
+  font-size: 12px;
+  color: var(--saas-muted, #5f6b77);
+}
+
+.ra-attach-status.busy{
+  color: var(--saas-blue);
+}
+
+.ra-attach-status.ok{
+  color: var(--saas-blue-dark);
+}
+
+.ra-attach-status.err{
+  color: var(--saas-danger, #b00020);
+}
+
+.ra-attach-status.busy::before{
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: -2px;
+  animation: ra-spin 0.8s linear infinite;
+}
+
+@keyframes ra-spin{
+  to{ transform: rotate(360deg); }
+}
+
+.ra-drawer-overlay.ra-drawer-busy{
+  cursor: progress;
+}
+
+/* ===================================================================
+   Resale Application - SaaS Section Unification (Escrow grid + drawers)
+   - Additive only
+   =================================================================== */
+
+.la-hd-left{ display:flex; align-items:center; gap:10px; min-width:0; }
+.la-hd-title{ font-weight:900; }
+.la-hd-meta{ color: var(--slds-text-weak); font-weight:700; font-size:.9rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.la-badge{
+  display:inline-flex; align-items:center; justify-content:center;
+  border:1px solid var(--slds-border, #d8dde6);
+  background: var(--slds-surface, #fff);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-weight: 800;
+  font-size: .78rem;
+  color: var(--slds-text-weak, #576574);
+}
+.la-badge--ok{ border-color:#b9e6c8; background:#f0faf4; color: var(--slds-success, #2e844a); }
+.la-badge--warn{ border-color:#fde68a; background:#fff7ed; color:#92400e; }
+.la-badge--muted{ background: var(--slds-bg-alt, #f4f6f9); }
+
+/* Escrow compact grid */
+#la-header-form .es-grid-wrap{ overflow-x:auto; }
+#la-header-form table.es-grid{ width:100%; margin:0; }
+#la-header-form table.es-grid th,
+#la-header-form table.es-grid td{ padding:.55rem .65rem; vertical-align:middle; }
+#la-header-form .es-role{ font-weight:900; white-space:nowrap; }
+#la-header-form .es-muted{ color: var(--slds-text-weak, #576574); font-weight:700; }
+#la-header-form .es-actions{ text-align:right; white-space:nowrap; }
+#la-header-form .es-inline-btn{ padding:.35rem .6rem; border-radius:.5rem; }
+#la-header-form .es-hint{ margin-top:8px; color: var(--slds-text-weak); font-size:.85rem; }
+#la-header-form .es-kpis{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+#la-header-form .es-kpi{ font-weight:800; color: var(--slds-text-weak); }
+#la-header-form .es-kpi b{ color: var(--slds-text); font-weight:900; }
+
+/* Escrow drawer (mirror Financial Assets drawer) */
+.es-drawer-overlay{
+  position: fixed; inset:0;
+  background: rgba(17, 24, 39, 0.45);
+  z-index: 9999;
+  display:none;
+}
+.es-drawer-overlay.open{ display:block; }
+
+.es-drawer{
+  position:absolute; top:0; right:0;
+  height:100%;
+  width: min(560px, 100%);
+  background: var(--slds-surface, #fff);
+  box-shadow: var(--slds-shadow-lg);
+  border-left: 1px solid var(--slds-border);
+  display:flex; flex-direction:column;
+  transform: translateX(100%);
+  transition: transform 180ms ease;
+}
+.es-drawer-overlay.open .es-drawer{ transform: translateX(0); }
+
+.es-drawer__hd{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:.85rem .95rem;
+  border-bottom:1px solid var(--slds-border);
+  background: var(--slds-bg-alt);
+  gap:10px;
+}
+.es-drawer__title{ font-weight:900; }
+.es-drawer__bd{ padding: .9rem .95rem; overflow:auto; }
+.es-drawer__ft{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:.85rem .95rem;
+  border-top:1px solid var(--slds-border);
+  background: #fff;
+}
+
+.es-field{ margin-bottom:12px; }
+.es-label{ display:block; font-weight:900; color: var(--slds-text-weak); margin-bottom:6px; }
+.es-input{ width:100%; border:1px solid var(--slds-border); border-radius:.6rem; padding:.55rem .65rem; }
+.es-input[disabled]{ background:#f4f6f9; }
+
+.es-menu{
+  position:absolute;
+  inset:auto 0 auto 0;
+  margin-top:6px;
+  border:1px solid var(--slds-border);
+  background:#fff;
+  border-radius:.75rem;
+  box-shadow: var(--slds-shadow);
+  max-height: 260px;
+  overflow:auto;
+  z-index: 10000;
+}
+.es-menu-item{
+  padding:.55rem .65rem;
+  cursor:pointer;
+  font-weight:800;
+}
+.es-menu-item small{ display:block; font-weight:700; color: var(--slds-text-weak); }
+.es-menu-item:hover,
+.es-menu-item[aria-selected="true"]{
+  background: rgba(1,118,211,.10);
+}
+
+.es-uploading{
+  display:inline-flex; align-items:center; gap:8px;
+  font-weight:800; color: var(--slds-text-weak);
+}
+.es-spinner{
+  width:14px; height:14px; border-radius:50%;
+  border: 2px solid rgba(1,118,211,.25);
+  border-top-color: var(--slds-brand, #0176d3);
+  animation: esSpin 800ms linear infinite;
+}
+@keyframes esSpin{ to{ transform: rotate(360deg); } }
+
+/* Financial Assets: collapse categories to reduce vertical space */
+.ra-grid-card.is-collapsed .ra-grid-bd{ display:none; }
+.ra-grid-card .ra-collapse{
+  border:1px solid var(--slds-border);
+  background:#fff;
+  border-radius:.6rem;
+  padding:.35rem .55rem;
+  font-weight:900;
+}
+.ra-grid-card .ra-collapse:hover,
+.ra-grid-card .ra-collapse:focus,
+.ra-grid-card .ra-collapse:focus-visible{
+  border-color: var(--slds-brand, #0176d3);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(1,118,211,.22);
+}
+
+/* Applicants list: constrain height + compact feel */
+#la-applicants .entitylist{ max-height: 420px; overflow:auto; border:1px solid var(--slds-border); border-radius:.75rem; }
+#la-applicants table{ margin-bottom:0; }
+/* FILE: Resale Application.en-US.customcss.css (append at end)
+   PURPOSE: SaaS-blue hover + focus for Details + Save/Close buttons */
+
+:root {
+  --saas-blue: #0176d3;
+  --saas-blue-rgb: 1, 118, 211;
+  --saas-focus-ring: 0 0 0 3px rgba(var(--saas-blue-rgb), 0.25);
+}
+
+/* Resale Escrow buttons: Details + Cancel -> SaaS blue on hover + tab focus (white text)
+   Drop-in replacement snippet. */
+:root{
+  --saas-blue: var(--slds-brand, #0176d3);
+  --saas-blue-dark: var(--slds-brand-dark, #014486);
+  --saas-focus-ring: 0 0 0 2px #ffffff, 0 0 0 4px rgba(1,118,211,.45);
+}
+
+/* Base (keep them neutral by default) */
+#la-header-form .es-inline-btn,
+.es-drawer__ft .btn[data-es-cancel],
+.es-drawer__ft .btn.btn-default[data-es-cancel]{
+  background: #ffffff !important;
+  border-color: var(--slds-border, #d8dde6) !important;
+  color: var(--slds-text, #1f2a36) !important;
+}
+
+/* Hover + keyboard focus = SaaS blue + white text */
+#la-header-form .es-inline-btn:hover,
+#la-header-form .es-inline-btn:focus,
+#la-header-form .es-inline-btn:focus-visible,
+.es-drawer__ft .btn[data-es-cancel]:hover,
+.es-drawer__ft .btn[data-es-cancel]:focus,
+.es-drawer__ft .btn[data-es-cancel]:focus-visible{
+  background: var(--saas-blue) !important;
+  border-color: var(--saas-blue) !important;
+  color: #ffffff !important;
+  outline: none !important;
+  box-shadow: var(--saas-focus-ring) !important;
+}
+
+/* Pressed */
+#la-header-form .es-inline-btn:active,
+#la-header-form .es-inline-btn.active,
+.es-drawer__ft .btn[data-es-cancel]:active,
+.es-drawer__ft .btn[data-es-cancel].active{
+  background: var(--saas-blue-dark) !important;
+  border-color: var(--saas-blue-dark) !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}

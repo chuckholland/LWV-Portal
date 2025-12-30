@@ -1,0 +1,85 @@
+<!-- FILE: /Lease-Application/Lease Application.en-US.webpage.copy.html
+     PURPOSE: SaaS layout consistent with Dashboard; keep IDs used by your JS.
+--><meta charset="utf-8" /><title>Lease Application</title><meta name="viewport" content="width=device-width, initial-scale=1" />
+<main id="lease-app" style="max-width: 1100px; margin-top: 16px; margin-right: auto; margin-bottom: 64px; margin-left: auto; padding-top: 0px; padding-right: 10px; padding-bottom: 0px; padding-left: 10px;">
+  <section class="la-shell" style="padding-top: 16px; padding-right: 16px; padding-bottom: 16px; padding-left: 16px; box-shadow: var(--slds-shadow);">
+    <!-- Header -->
+    <header class="la-hdr" style="display: flex; align-items: flex-start; justify-content: space-between; row-gap: 12px; column-gap: 12px; margin-bottom: 12px;">
+      <div>
+        <h1 class="la-title" style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-size: 1.25rem; font-weight: 800; color: var(--slds-text);">Resale Application</h1>
+        <p class="la-subtitle" style="margin-top: 4px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-size: 0.95rem; color: var(--slds-text-weak);">Review application details and manage applicants.</p>
+      </div>
+      <a id="la-back" href="/dashboard" class="btn btn-neutral" style="display: inline-flex; align-items: center; justify-content: center; row-gap: 0.5rem; column-gap: 0.5rem; font-weight: 700; padding-top: 0.55rem; padding-right: 1rem; padding-bottom: 0.55rem; padding-left: 1rem; transition-behavior: normal, normal, normal, normal; transition-duration: 0.02s, 0.15s, 0.15s, 0.15s; transition-timing-function: ease, ease, ease, ease; transition-delay: 0s, 0s, 0s, 0s; transition-property: transform, box-shadow, background, border-color; text-decoration-line: none; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; cursor: pointer; color: var(--slds-text);">Back to Dashboard</a>
+    </header>
+    <!-- Toast -->
+    <div id="la-toast" aria-live="polite" class="la-toast" style="margin-top: 0px; margin-right: 0px; margin-bottom: 12px; margin-left: 0px; padding-top: 0.6rem; padding-right: 0.75rem; padding-bottom: 0.6rem; padding-left: 0.75rem; color: var(--slds-text); display: none;"></div>
+    <!-- Application Details -->
+    <section id="la-summary" class="la-card" style="box-shadow: var(--slds-shadow); overflow-x: hidden; overflow-y: hidden; margin-top: 12px;">
+      <div class="la-card__hd" style="display: flex; align-items: center; justify-content: space-between; row-gap: 12px; column-gap: 12px; padding-top: 0.65rem; padding-right: 0.9rem; padding-bottom: 0.65rem; padding-left: 0.9rem; font-weight: 800; color: var(--slds-text);">Application Details</div>
+      <div class="la-card__bd" style="padding-top: 0.9rem; padding-right: 0.9rem; padding-bottom: 0.9rem; padding-left: 0.9rem;">
+        <div class="la-meta" style="display: flex; flex-wrap: wrap; row-gap: 12px; column-gap: 18px;">
+          <div><b style="color: var(--slds-text-weak); font-weight: 800;">Application #:</b> <span id="la-appnum">—</span></div>
+          <div><b style="color: var(--slds-text-weak); font-weight: 800;">Unit:</b> <span id="la-unit">—</span></div>
+          <div><b style="color: var(--slds-text-weak); font-weight: 800;">Mutual:</b> <span id="la-mutual">—</span></div>
+          <div><b style="color: var(--slds-text-weak); font-weight: 800;">Status:</b> <span id="la-status">—</span></div>
+        </div>
+      </div>
+    </section>
+    <!-- Lease Header -->
+    <section id="la-header-form" class="la-card" style="box-shadow: var(--slds-shadow); overflow-x: hidden; overflow-y: hidden; margin-top: 12px;">
+      <div class="la-card__hd" style="display: flex; align-items: center; justify-content: space-between; row-gap: 12px; column-gap: 12px; padding-top: 0.65rem; padding-right: 0.9rem; padding-bottom: 0.65rem; padding-left: 0.9rem; font-weight: 800; color: var(--slds-text);">Escrow Details</div>
+      <div class="la-card__bd" style="padding-top: 0.9rem; padding-right: 0.9rem; padding-bottom: 0.9rem; padding-left: 0.9rem;">
+        <div id="es-root"></div>
+      </div>
+    </section>
+    <!-- Applicants -->
+    <section id="la-applicants" class="la-card" style="box-shadow: var(--slds-shadow); overflow-x: hidden; overflow-y: hidden; margin-top: 12px;">
+      <div class="la-card__hd" style="display: flex; align-items: center; justify-content: space-between; row-gap: 12px; column-gap: 12px; padding-top: 0.65rem; padding-right: 0.9rem; padding-bottom: 0.65rem; padding-left: 0.9rem; font-weight: 800; color: var(--slds-text);"><span>Applicants</span></div>
+      <div class="la-card__bd" style="padding-top: 0.9rem; padding-right: 0.9rem; padding-bottom: 0.9rem; padding-left: 0.9rem;">{% include 'entity_list' key: 'Basic Applicant View' %}</div>
+    </section>
+
+    <!-- =========================================================
+FILE: /Resale-Application/Resale Application.en-US.webpage.copy.html
+Drop this section where you want the financial grid to appear
+(keep your existing Application Details + Applicants list as-is)
+========================================================= -->
+
+<section class="la-card" id="ra-fin-assets">
+  <div class="la-card__hd">
+    <span>Financial Assets</span>
+    <span class="ra-badge">Financial Qualification</span>
+  </div>
+
+  <div class="la-card__bd">
+    <div class="ra-note">
+      Add line items by category. Enter a <b>Line Total</b> for each item; the portal will calculate the <b>Grand Total</b>.
+    </div>
+
+    <div id="ra-fin-grids"></div>
+
+    <div class="ra-totals">
+      <div class="ra-total-row">
+        <div class="ra-total-label">Grand Total (Include = Yes)</div>
+        <div class="ra-total-value" id="ra-grand-total">$0</div>
+      </div>
+      <div class="ra-total-row ra-total-row--muted">
+        <div class="ra-total-label">Total (All Lines)</div>
+        <div class="ra-total-value" id="ra-grand-total-all">$0</div>
+      </div>
+    </div>
+
+    <div class="la-ftr" style="margin-top:12px;">
+      <button type="button" class="btn btn-primary" id="ra-save-assets">Save Financial Assets</button>
+    </div>
+
+    <div id="ra-assets-msg" class="ra-msg" style="display:none;"></div>
+  </div>
+</section>
+
+    <!-- Footer Actions -->
+    <footer class="la-ftr" style="display: flex; justify-content: flex-end; row-gap: 10px; column-gap: 10px; margin-top: 14px;"><button type="button" id="la-save" class="btn btn-primary" style="display: inline-flex; align-items: center; justify-content: center; row-gap: 0.5rem; column-gap: 0.5rem; font-weight: 700; padding-top: 0.55rem; padding-right: 1rem; padding-bottom: 0.55rem; padding-left: 1rem; transition-behavior: normal, normal, normal, normal; transition-duration: 0.02s, 0.15s, 0.15s, 0.15s; transition-timing-function: ease, ease, ease, ease; transition-delay: 0s, 0s, 0s, 0s; transition-property: transform, box-shadow, background, border-color; text-decoration-line: none; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; cursor: pointer; color: var(--slds-brand-contrast);">Save</button><button type="button" id="la-finish" class="btn btn-neutral" style="display: inline-flex; align-items: center; justify-content: center; row-gap: 0.5rem; column-gap: 0.5rem; font-weight: 700; padding-top: 0.55rem; padding-right: 1rem; padding-bottom: 0.55rem; padding-left: 1rem; transition-behavior: normal, normal, normal, normal; transition-duration: 0.02s, 0.15s, 0.15s, 0.15s; transition-timing-function: ease, ease, ease, ease; transition-delay: 0s, 0s, 0s, 0s; transition-property: transform, box-shadow, background, border-color; text-decoration-line: none; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; cursor: pointer; color: var(--slds-text);">Save &amp; Close</button></footer>
+  </section>
+</main>
+<div class="row sectionBlockLayout text-start" style="display: flex; flex-wrap: wrap; margin: 0px; min-height: auto; padding: 8px;">
+  <div class="container" style="padding: 0px; display: flex; flex-wrap: wrap;"><div class="col-lg-12 columnBlockLayout" style="flex-grow: 1; display: flex; flex-direction: column; min-width: 250px;"></div></div>
+</div>
