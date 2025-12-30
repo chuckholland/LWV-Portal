@@ -15,13 +15,34 @@
     <div id="la-toast" aria-live="polite" class="la-toast" style="margin-top: 0px; margin-right: 0px; margin-bottom: 12px; margin-left: 0px; padding-top: 0.6rem; padding-right: 0.75rem; padding-bottom: 0.6rem; padding-left: 0.75rem; color: var(--slds-text); display: none;"></div>
     <!-- Application Details -->
     <section id="la-summary" class="la-card" style="box-shadow: var(--slds-shadow); overflow-x: hidden; overflow-y: hidden; margin-top: 12px;">
-      <div class="la-card__hd" style="display: flex; align-items: center; justify-content: space-between; row-gap: 12px; column-gap: 12px; padding-top: 0.65rem; padding-right: 0.9rem; padding-bottom: 0.65rem; padding-left: 0.9rem; font-weight: 800; color: var(--slds-text);">Application Details</div>
+      <div class="la-card__hd" style="display: flex; align-items: center; justify-content: space-between; row-gap: 12px; column-gap: 12px; padding-top: 0.65rem; padding-right: 0.9rem; padding-bottom: 0.65rem; padding-left: 0.9rem; font-weight: 800; color: var(--slds-text);">
+        <div class="la-hd-left">
+          <span class="la-hd-title">Application Details</span>
+        </div>
+        <span id="la-status-pill" class="la-badge la-badge--muted">—</span>
+      </div>
       <div class="la-card__bd" style="padding-top: 0.9rem; padding-right: 0.9rem; padding-bottom: 0.9rem; padding-left: 0.9rem;">
-        <div class="la-meta" style="display: flex; flex-wrap: wrap; row-gap: 12px; column-gap: 18px;">
-          <div><b style="color: var(--slds-text-weak); font-weight: 800;">Application #:</b> <span id="la-appnum">—</span></div>
-          <div><b style="color: var(--slds-text-weak); font-weight: 800;">Unit:</b> <span id="la-unit">—</span></div>
-          <div><b style="color: var(--slds-text-weak); font-weight: 800;">Mutual:</b> <span id="la-mutual">—</span></div>
-          <div><b style="color: var(--slds-text-weak); font-weight: 800;">Status:</b> <span id="la-status">—</span></div>
+        <div class="ra-appdetails-grid">
+          <div class="ra-appdetails-field">
+            <label class="ra-appdetails-label" for="la-appnum">Application #</label>
+            <input id="la-appnum" class="ra-in" type="text" readonly />
+          </div>
+          <div class="ra-appdetails-field">
+            <label class="ra-appdetails-label" for="la-unit">Unit</label>
+            <input id="la-unit" class="ra-in" type="text" readonly />
+          </div>
+          <div class="ra-appdetails-field">
+            <label class="ra-appdetails-label" for="la-mutual">Mutual</label>
+            <input id="la-mutual" class="ra-in" type="text" readonly />
+          </div>
+          <div class="ra-appdetails-field">
+            <label class="ra-appdetails-label" for="la-address">Address</label>
+            <input id="la-address" class="ra-in" type="text" readonly />
+          </div>
+          <div class="ra-appdetails-field">
+            <label class="ra-appdetails-label" for="la-appdate">Application Date</label>
+            <input id="la-appdate" class="ra-in" type="text" readonly />
+          </div>
         </div>
       </div>
     </section>
